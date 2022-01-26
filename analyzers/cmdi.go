@@ -34,7 +34,9 @@ var CommandInjectionAnalyzer = &analysis.Analyzer{
 // vulnCmdInjectionFuncs() returns a map of command injection functions that may be vulnerable when used with user controlled input
 func vulnCmdInjectionFuncs() map[string][]string {
 	return map[string][]string{
-		"os/exec": {"Command", "CommandContext"},
+		"os/exec":                   {"Command", "CommandContext"},
+		"syscall":                   {"Exec", "ForkExec", "StartProcess"},
+		"golang.org/x/sys/execabs/": {"Command", "CommandContext"},
 	}
 }
 
